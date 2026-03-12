@@ -1,0 +1,27 @@
+name: Daily News Digest
+
+on:
+  schedule:
+    # 毎朝 8:00 JST = 23:00 UTC (前日)
+    - cron: "0 23 * * *"
+  workflow_dispatch: # 手動実行も可能
+
+jobs:
+  notify:
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+
+      - name: Run daily news bot
+        env:
+          NEWSAPI_KEY: ${{ secrets.NEWSAPI_KEY }}
+          SLACK_WEBHOOK_URL: ${{ secrets.SLACK_WEBHOOK_URL }}
+        run: python main.py
