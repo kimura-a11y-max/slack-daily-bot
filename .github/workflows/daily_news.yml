@@ -24,4 +24,4 @@ jobs:
         env:
           NEWSAPI_KEY: ${{ secrets.NEWSAPI_KEY }}
           SLACK_WEBHOOK_URL: ${{ secrets.SLACK_WEBHOOK_URL }}
-        run: python main.py
+        run: NEWS_QUERY='インサイドセールス OR AIワークフロー OR SaaS OR スタートアップ OR マーケティング' python main.py
