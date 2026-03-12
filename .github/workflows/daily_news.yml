@@ -24,4 +24,5 @@ jobs:
         env:
           NEWSAPI_KEY: ${{ secrets.NEWSAPI_KEY }}
           SLACK_WEBHOOK_URL: ${{ secrets.SLACK_WEBHOOK_URL }}
+            NEWS_QUERY: ${{ secrets.NEWS_QUERY }}
         run: python main.py
