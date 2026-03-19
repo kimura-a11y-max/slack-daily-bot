@@ -4,13 +4,12 @@ on:
   schedule:
     # 毎朝 8:00 JST = 23:00 UTC (前日)
     - cron: "0 23 * * *"
-  workflow_dispatch: # 手動実行も可能
+  workflow_dispatch:
 
 jobs:
   notify:
     runs-on: ubuntu-latest
     timeout-minutes: 5
-
     steps:
       - name: Checkout repository
         uses: actions/checkout@v4
@@ -24,4 +23,9 @@ jobs:
         env:
           NEWSAPI_KEY: ${{ secrets.NEWSAPI_KEY }}
           SLACK_WEBHOOK_URL: ${{ secrets.SLACK_WEBHOOK_URL }}
-    run: export NEWS_QUERY="インサイドセールス OR AIワークフロー OR SaaS OR スタートアップ OR マーケティング" && python main.py
+          NEWS_QUERY: "インサイドセールス OR AIワークフロー OR SaaS OR スタートアップ OR マーケティング"
+          NEWS_LANGUAGE: "ja"
+          NEWS_PAGE_SIZE: "5"
+          NOTE_RSS_URL: "https://note.com/api/v1/rss"
+          NOTE_MAX_ARTICLES: "5"
+        run: python main.py
