@@ -34,7 +34,6 @@ def fetch_newsapi_articles() -> list[dict]:
     params = urllib.parse.urlencode({
         "q": NEWS_QUERY,
         "language": NEWS_LANGUAGE,
-        "from": yesterday,
         "sortBy": "relevancy",
         "pageSize": NEWS_PAGE_SIZE,
         "apiKey": NEWSAPI_KEY,
